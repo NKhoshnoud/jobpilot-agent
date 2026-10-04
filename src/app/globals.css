@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+html {
+  direction: rtl;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: "Vazirmatn", Tahoma, "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.8;
+  direction: rtl;
+  text-align: right;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input, textarea, select, button {
+  font-family: inherit;
+}
+
+/* Keep LTR for emails, codes, numbers when needed */
+[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: embed;
+}
+
+/* Chat bubbles */
+.chat-bubble {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// برای لوکال: sqlite + DATABASE_URL="file:./dev.db"
+// برای Vercel/Neon: postgresql + connection string از Neon
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String?
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  profile      Profile?
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skills      String   @default("[]")
+  level       String?
+  preferences String   @default("{}")
+  resumeData  String   @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
